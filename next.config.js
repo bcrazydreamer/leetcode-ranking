@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { lastCommit } = require('./server/utils');
 const getHashAsync = lastCommit({ cwd: process.cwd() });
 
@@ -14,5 +15,8 @@ module.exports = {
     }
     hash += '-ts-' + new Date().getTime();
     return hash;
+  },
+  images: {
+    domains: ['assets.leetcode.com','assets.leetcode.cn'],
   },
 };

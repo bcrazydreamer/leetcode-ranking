@@ -1,6 +1,9 @@
 {
   "name": "next-boilerplate",
   "private": true,
+  "cacheDirectories": [
+    ".next/cache"
+  ],
   "scripts": {
     "dev": "NODE_ENV=development node ./server",
     "build": "NODE_ENV=production next build ./client",
@@ -20,6 +23,7 @@
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.5.1",
     "@mui/styles": "^5.5.1",
     "compression": "^1.7.4",

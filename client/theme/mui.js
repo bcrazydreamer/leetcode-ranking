@@ -1,19 +1,23 @@
-import React from "react";
+import React from 'react';
 import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#EC4747",
+  components: {
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: {
+          '&.Mui-selected': {
+            color: '#fff',
+            background: '#482997',
+          },
+        },
+      },
     },
   },
-  overrides: {},
 });
 
 export default theme;
 
-const ThemeProvider = (props) => (
-  <MuiThemeProvider theme={theme}>{props.children}</MuiThemeProvider>
-);
+const ThemeProvider = (props) => <MuiThemeProvider theme={theme}>{props.children}</MuiThemeProvider>;
 
 export { ThemeProvider };
