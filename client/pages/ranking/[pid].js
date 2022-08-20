@@ -2,8 +2,13 @@ import { Ranking } from '../../components';
 
 export async function getStaticProps(context) {
   const { params } = context;
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/ranking/${params.pid}`);
-  const response = await res.json();
+  let response;
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/ranking/${params.pid}`);
+    response = await res.json();
+  } catch (err) {
+    response = { data: { totalUsers: 0, userPerPage: 0, rankingNodes: [] } };
+  }
   const totalPage = response.data.totalUsers / response.data.userPerPage + 1;
   return {
     props: { ranking: response.data, page: Number(params.pid), totalPage: parseInt(totalPage) },
@@ -11,8 +16,13 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/ranking/1?pageInfo=true`);
-  const response = await res.json();
+  let response;
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/ranking/1?pageInfo=true`);
+    response = await res.json();
+  } catch (err) {
+    response = { data: { totalUsers: 0, userPerPage: 0, rankingNodes: [] } };
+  }
   const data = response.data;
   let totalUser = data.totalUsers || 0;
   let userPerPage = data.userPerPage || 0;
