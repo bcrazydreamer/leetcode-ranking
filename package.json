@@ -4,6 +4,9 @@
   "cacheDirectories": [
     ".next/cache"
   ],
+  "engines": {
+    "node": "16.x.x"
+  },
   "scripts": {
     "dev": "NODE_ENV=development node ./server",
     "build": "NODE_ENV=production next build ./client",
