@@ -6,7 +6,7 @@ export async function getStaticProps(context) {
   const response = await res.json();
   const totalPage = response.data.totalUsers / response.data.userPerPage + 1;
   return {
-    props: { ranking: response.data, params, page: Number(params.pid), totalPage: parseInt(totalPage) },
+    props: { ranking: response.data, page: Number(params.pid), totalPage: parseInt(totalPage) },
   };
 }
 
