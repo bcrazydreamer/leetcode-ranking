@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Box, Card } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Header from './Header';
 import Top3 from './Top3';
 import UsersList from './UsersList';
@@ -9,6 +11,14 @@ import Pagination from './Pagination';
 const Ranking = ({ data, page, totalPage }) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const theme = useTheme();
+  let pagePadding = '25%';
+  if (useMediaQuery(theme.breakpoints.down('md'))) {
+    pagePadding = '10%';
+  }
+  if (useMediaQuery(theme.breakpoints.down('sm'))) {
+    pagePadding = '10px';
+  }
 
   // reset loading
   useEffect(() => {
@@ -22,8 +32,8 @@ const Ranking = ({ data, page, totalPage }) => {
 
   return (
     <>
-      <Header/>
-      <Box px="25%" height="100vh">
+      <Header />
+      <Box px={pagePadding} height="100vh">
         <Box height="100%">
           {(data?.rankingNodes?.slice(0, 3) || []).length === 3 && (
             <Top3 users={data?.rankingNodes?.slice(0, 3)} loading={loading} />
