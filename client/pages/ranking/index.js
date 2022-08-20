@@ -9,7 +9,7 @@ export async function getStaticProps(context) {
     response = { data: { totalUsers: 0, userPerPage: 0, rankingNodes: [] } };
   }
   let totalPage = response.data.totalUsers / response.data.userPerPage + 1;
-  totalPage = totalPage > 100 ? 100 : totalPage;
+  totalPage = totalPage > 2000 ? 2000 : totalPage;
   return {
     props: { ranking: response.data, page: 1, totalPage: parseInt(totalPage) },
   };
