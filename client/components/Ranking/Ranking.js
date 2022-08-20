@@ -44,7 +44,7 @@ const Ranking = ({ data, page, totalPage }) => {
                 <Pagination totalPage={totalPage} currentPage={page} onChange={handleChange} />
               </Box>
               <Card sx={{ mt: 2 }}>
-                <UsersList users={data.rankingNodes} loading={loading} />
+                <UsersList users={data?.rankingNodes} loading={loading} />
               </Card>
             </>
           )}

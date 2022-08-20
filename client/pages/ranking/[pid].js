@@ -9,7 +9,8 @@ export async function getStaticProps(context) {
   } catch (err) {
     response = { data: { totalUsers: 0, userPerPage: 0, rankingNodes: [] } };
   }
-  const totalPage = response.data.totalUsers / response.data.userPerPage + 1;
+  let totalPage = response.data.totalUsers / response.data.userPerPage + 1;
+  totalPage = totalPage > 100 ? 100 : totalPage;
   return {
     props: { ranking: response.data, page: Number(params.pid), totalPage: parseInt(totalPage) },
   };
@@ -27,8 +28,12 @@ export async function getStaticPaths() {
   let totalUser = data.totalUsers || 0;
   let userPerPage = data.userPerPage || 0;
   let paths = [];
+
+  let totalPage = totalUser / userPerPage + 1;
+  totalPage = totalPage > 100 ? 100 : totalPage;
+
   if (userPerPage !== 0 && totalUser !== 0) {
-    for (let i = 1; i <= totalUser / userPerPage + 1; i++) {
+    for (let i = 1; i <= totalPage; i++) {
       paths.push({ params: { pid: i + '' } });
     }
   }
@@ -39,5 +44,5 @@ export async function getStaticPaths() {
 }
 
 export default function Home(props) {
-  return <Ranking data={props.ranking} page={props.page} totalPage={props.totalPage} />;
+  return <Ranking data={props?.ranking} page={props?.page} totalPage={props?.totalPage} />;
 }
